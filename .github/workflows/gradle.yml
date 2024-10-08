@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -21,7 +24,8 @@ jobs:
         run: chmod +x gradlew
       - name: Build the mod
         run: ./gradlew --no-daemon build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: Vintagium
           path: build/libs
+
